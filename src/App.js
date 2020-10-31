@@ -1,10 +1,8 @@
 import Agents from './Agents';
-function App() {{
+function App() {
     return (
       <Agents />
     );
-  }
-
 }
 
 export default App;

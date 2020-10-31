@@ -25,12 +25,10 @@ Basic Task List (minimum requirements)
     * What should the user see when the UI first renders?
         * form to add an agent at top with add/submit button
         * display all agents
-    * [ ] Display all agents (agent id, first, middle, last name, not all properties)
-        * [ ] may need to include empty values for missing properties in constructor
-        * [ ] include edit button to the right
-        * [ ] include delete button to the right
-        * [ ] Delete an agent
-        * make button to the right of an agent delete that agent
+    * [x] Display all agents (agent id, first, (middle), last name, not all properties)
+        * [x] may need to include empty values for missing properties in constructor
+        * [x] include edit button to the right
+        * [x] include delete button to the right
     * [ ] Add an agent
         * [ ] Create forms and submit button next to form at top of page
         * [ ] reject invalid data
@@ -55,4 +53,10 @@ Advanced Task List (add-ons if there's time)
         * [ ] include an "are you sure" alert
 
 Questions
-    * 
+    * Why is agent.id undefined in render()?
+    * What do I do if middle name is null? 
+        * As of now, solution would be to not include optional values...
+    * turn property Handlers into a single changeHandler?
+        * does the value part of an input tag tie that input to that property?
+
+Next Up: Work on "addSubmitHandler" method... doesn't work currently.

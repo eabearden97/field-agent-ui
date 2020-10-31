@@ -34,18 +34,6 @@ class Agents extends React.Component {
         });
     }
 
-    // CRUD Handlers
-    // POST http://localhost:8080/api/agent HTTP/1.1
-    // Content-Type: application/json
-
-    // {
-    //     "firstName": "Edward",
-    //     "middleName": "Alexander",
-    //     "lastName": "Bearden",
-    //     "dob": "1997-08-08",
-    //     "heightInInches": 60
-    // }
-
     addSubmitHandler = (event) => {
         event.preventDefault();
         fetch('http://localhost:8080/api/agent', {
@@ -65,20 +53,18 @@ class Agents extends React.Component {
         .then((response) => {
             if(response.status === 201) {
                 console.log("Success!");
-                // This code needs to be updated...
-                // pass in more than one variable where "data" is?
-                // would allow to update multiple variables in setState
-                // fetch('http://localhost:8080/api/todos')
-                //     .then((response) => response.json())
-                //     .then((data) => {
-                //         this.setState({
-                //             toDos: data,
-                //         });
-                //     });
+                fetch('http://localhost:8080/api/agent')
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.setState({
+                            agents: data,
+                        });
+                    });
             }
-            // add more if statements to account for possible errors
-            if(response.status === 400) {
-                console.log("Error: 400 Server not found...");
+            else if (response.status === 400) {
+                response.json().then(data => console.log(data));
+            } else {
+                console.log('Unknown response error: ' + response);
             }
 
         })

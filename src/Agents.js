@@ -49,7 +49,6 @@ class Agents extends React.Component {
                     heightInInches: this.state.heightInInches
             }),
         })
-        // currently not successful at creating
         .then((response) => {
             if(response.status === 201) {
                 console.log("Success!");
@@ -67,6 +66,26 @@ class Agents extends React.Component {
                 console.log('Unknown response error: ' + response);
             }
 
+        })
+    }
+
+    deleteAgent = (agentId) => {
+        fetch(`http://localhost:8080/api/agent/${agentId}`, {
+            method: 'DELETE',
+        })
+        .then((response) => {
+            if (response.status === 204) {
+                console.log("Success!");
+                fetch('http://localhost:8080/api/agent')
+                    .then((response) => response.json())
+                    .then((data) => {
+                        this.setState({
+                            agents: data,
+                        });
+                    });
+            } else {
+                console.log('Unknown response error: ' + response);
+            }
         })
     }
     
@@ -87,7 +106,7 @@ class Agents extends React.Component {
                             <li key={agent.agentId}>{"ID: " + agent.agentId +  
                                 "... Agent: " + agent.firstName + " " + agent.middleName + " " + agent.lastName}
                                 <button> Edit </button>
-                                <button> Delete </button>
+                                <button onClick={() => this.deleteAgent(agent.agentId)}> Delete </button>
                             </li>
                         ))}
                     </ul>

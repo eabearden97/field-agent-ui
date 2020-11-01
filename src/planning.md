@@ -29,9 +29,9 @@ Basic Task List (minimum requirements)
         * [x] may need to include empty values for missing properties in constructor
         * [x] include edit button to the right
         * [x] include delete button to the right
-    * [ ] Add an agent
-        * [ ] Create forms and submit button next to form at top of page
-        * [ ] reject invalid data
+    * [x] Add an agent
+        * [x] Create forms and submit button next to form at top of page
+        * [x] reject invalid data
         * [ ] cancel button (reverts info to before add/cancels add)
             * [ ] put this next to submit button
     * [ ] Update an agent
@@ -56,7 +56,5 @@ Questions
     * Why is agent.id undefined in render()?
     * What do I do if middle name is null? 
         * As of now, solution would be to not include optional values...
-    * turn property Handlers into a single changeHandler?
-        * does the value part of an input tag tie that input to that property?
 
-Next Up: Work on "addSubmitHandler" method... doesn't work currently.
+Next Up: 

@@ -9,22 +9,43 @@ class Agents extends React.Component {
             firstName: '',
             middleName: '',
             lastName: '',
-            //How do you deal with dates... (string?)
             dob: '',
             heightInInches: 0,
             agencies: [],
             aliases: [],
+            mode: 'Add',
+            errors: []
         };
     }
 
     componentDidMount() {
+        this.getAgents();
+    }
+
+    getAgents = () => {
         fetch('http://localhost:8080/api/agent')
-            .then(response => response.json())
-            .then(data => {
-              this.setState({
-                agents: data
-              });
+        .then((response) => response.json())
+        .then((data) => {
+            this.setState({
+                agents: data,
             });
+        });
+    }
+
+    setNullState = () => {
+        this.setState({
+            agents: [],
+            agentId: 0,
+            firstName: '',
+            middleName: '',
+            lastName: '',
+            dob: '',
+            heightInInches: 0,
+            agencies: [],
+            aliases: [],
+            mode: 'Add',
+            errors: []
+        });
     }
 
     // Change Handler for inputs
@@ -51,19 +72,15 @@ class Agents extends React.Component {
         })
         .then((response) => {
             if(response.status === 201) {
-                console.log("Success!");
-                fetch('http://localhost:8080/api/agent')
-                    .then((response) => response.json())
-                    .then((data) => {
-                        this.setState({
-                            agents: data,
-                        });
-                    });
+                this.setNullState();
+                this.getAgents();
             }
             else if (response.status === 400) {
-                response.json().then(data => console.log(data));
+                response.json().then((data) => this.setState({
+                    errors: data
+                }));
             } else {
-                console.log('Unknown response error: ' + response);
+                throw new Error(`Unexpected response: ${response}`);
             }
         })
     }
@@ -86,19 +103,15 @@ class Agents extends React.Component {
         })
         .then((response) => {
             if(response.status === 204) {
-                console.log("Success!");
-                fetch('http://localhost:8080/api/agent')
-                    .then((response) => response.json())
-                    .then((data) => {
-                        this.setState({
-                            agents: data,
-                        });
-                    });
+                this.setNullState();
+                this.getAgents();
             }
             else if (response.status === 400) {
-                response.json().then(data => console.log(data));
+                response.json().then((data) => this.setState({
+                    errors: data
+                }));
             } else {
-                console.log('Unknown response error: ' + response);
+                throw new Error(`Unexpected response: ${response}`);
             }
         });
     }
@@ -109,16 +122,9 @@ class Agents extends React.Component {
         })
         .then((response) => {
             if (response.status === 204) {
-                console.log("Success!");
-                fetch('http://localhost:8080/api/agent')
-                    .then((response) => response.json())
-                    .then((data) => {
-                        this.setState({
-                            agents: data,
-                        });
-                    });
+                this.getAgents();
             } else {
-                console.log('Unknown response error: ' + response);
+                throw new Error(`Unexpected response: ${response}`);
             }
         })
     }
@@ -126,14 +132,15 @@ class Agents extends React.Component {
     editAgent = (agentId) => {
         fetch(`http://localhost:8080/api/agent/${agentId}`)
         .then((response) => response.json())
-        .then(({ agentId, firstName, middleName, lastName, dob, heightInInches}) => {
+        .then(({ firstName, middleName, lastName, dob, heightInInches}) => {
             this.setState({
                 agentId,
                 firstName,
                 middleName,
                 lastName,
                 dob,
-                heightInInches
+                heightInInches,
+                mode: 'Edit'
             });
         });
     }
@@ -161,52 +168,65 @@ class Agents extends React.Component {
                     </ul>
                 </div>
 
-                <div>
-                    <form onSubmit={this.addSubmitHandler}>
-                        <div>
-                            <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
-                        </div>
-                        <div>
-                            <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
-                        </div>
-                        <div>
-                            <button type="submit"> Add Agent </button>
-                        </div>
-                    </form>
-                </div>
+                {this.state.mode === 'Add' && (
+                    <div>
+                        <form onSubmit={this.addSubmitHandler}>
+                            <div>
+                                <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
+                            </div>
+                            <div>
+                                <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
+                            </div>
+                            <div>
+                                <button type="submit"> Add Agent </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
 
-                <div>
-                    <form onSubmit={this.editSubmitHandler}>
-                        <div>
-                            <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
-                        </div>
-                        <div>
-                            <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
-                        </div>
-                        <div>
-                            <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
-                        </div>
-                        <div>
-                            <button type="submit"> Edit Agent </button>
-                        </div>
-                    </form>
-                </div>
+                {this.state.mode === 'Edit' && (
+                    <div>
+                        <form onSubmit={this.editSubmitHandler}>
+                            <div>
+                                <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
+                            </div>
+                            <div>
+                                <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
+                            </div>
+                            <div>
+                                <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
+                            </div>
+                            <div>
+                                <button type="submit"> Edit Agent </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
 
+                {this.state.errors.length > 0 && (
+                    <div>
+                        <p> The following errors occurred: </p>
+                        {this.state.errors.map((error) => (
+                            <li key={error}> {error} </li> 
+                        ))}
+                    </div>
+                )}
+                
             </>
         );
     }

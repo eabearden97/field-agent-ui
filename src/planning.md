@@ -2,19 +2,18 @@ React Field Agent
     * Goal: start a React front-end for the Field Agent HTTP service
 
 High Level Requirements
-    * [ ] Display all agents
-    * [ ] Add an agent
-    * [ ] Update an agent
-    * [ ] Delete an agent
+    * [x] Display all agents
+    * [x] Add an agent
+    * [x] Update an agent
+    * [x] Delete an agent
     
 Technical Requirements
-    * [ ] Use Create React App
-    * [ ] Use fetch for async HTTP
-    * [ ] do not change Field Agent HTTP Service
-        * [ ] check to make sure my HTTP service is actually working first
+    * [x] Use Create React App
+    * [x] Use fetch for async HTTP
+    * [x] do not change Field Agent HTTP Service
+        * [x] check to make sure my HTTP service is actually working first
     * [ ] Use a CSS framework (optional, if time)
     * [ ] Test at least one component (optional, if time)
-    * [ ] 
 
 Basic Task List (minimum requirements)
     * [x] create GitHub repository
@@ -34,21 +33,31 @@ Basic Task List (minimum requirements)
         * [x] reject invalid data
         * [ ] cancel button (reverts info to before add/cancels add)
             * [ ] put this next to submit button
-    * [ ] Update an agent
-        * [ ] include form for each editable attribute
-        * [ ] submit button edits agent and all agent list
+    * [x] Update an agent
+        * [x] include form for each editable attribute
+        * [x] submit button edits agent and all agent list
         * [ ] cancel button reverts info to before edit/cancels edit
-    * [ ] Delete an agent
-        * [ ] have delete button next to each agent that allows for deletion
+    * [x] Delete an agent
+        * [x] have delete button next to each agent that allows for deletion
+    * [x] Make it so that you only see one form at a time (add/edit)
+        * this is accomplished with a new variable in constructor
+        * don't forget to set default
+    * [x] Add a getAgents method to fetch the list of agents... this will help with code reuse
+    * [x] Add a setNullState method to set the state back to null after every operation
+        * this should be in the (if response.status === 200/201/204) 
+            * call setNullState, then call getAgents
+    * [x] Implement global error handling
+        * just add an errors array to constructor and add any new errors to that
+        * [x] print any errors to the page in a list
 
 Advanced Task List (add-ons if there's time)
-    * [ ] Display all agents
+    * Display all agents
         * [ ] include button that expands so you can see all properties
-    * [ ] Add an agent
+    * Add an agent
         * [ ] Make this a separate page
-    * [ ] Update an agent
+    * Update an agent
         * [ ] make this a separate page
-    * [ ] Delete an agent
+    * Delete an agent
         * [ ] make this a separate page that expands so you can see all properties
         * [ ] include an "are you sure" alert
 
@@ -56,6 +65,9 @@ Questions
     * Why is agent.id undefined in render()?
     * What do I do if middle name is null? 
         * As of now, solution would be to not include optional values...
-    * make getAgents function instead of fetching after success in every function
+    * make it so that when you press edit next to an agent's name, it autofills
+    the edit fields with the current values
+    * why would you throw a new Error in the "else" part of a fetch response handling?
+        * this just crashes the page... wouldn't we want to add this to the errors array?
 
 Next Up: 

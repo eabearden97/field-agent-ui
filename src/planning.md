@@ -56,5 +56,6 @@ Questions
     * Why is agent.id undefined in render()?
     * What do I do if middle name is null? 
         * As of now, solution would be to not include optional values...
+    * make getAgents function instead of fetching after success in every function
 
 Next Up: 

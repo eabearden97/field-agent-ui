@@ -32,7 +32,7 @@ Basic Task List (minimum requirements)
         * [x] Create forms and submit button next to form at top of page
         * [x] reject invalid data
         * [ ] cancel button (reverts info to before add/cancels add)
-            * [ ] put this next to submit button
+            * put this next to submit button
     * [x] Update an agent
         * [x] include form for each editable attribute
         * [x] submit button edits agent and all agent list

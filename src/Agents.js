@@ -172,19 +172,19 @@ class Agents extends React.Component {
                     <div>
                         <form onSubmit={this.addSubmitHandler}>
                             <div>
-                                <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
+                                <input name="firstName" value={this.state.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
                             </div>
                             <div>
-                                <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
+                                <input name="middleName" value={this.state.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
                             </div>
                             <div>
-                                <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
+                                <input name="lastName" value={this.state.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
                             </div>
                             <div>
-                                <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
+                                <input name="dob" value={this.state.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
                             </div>
                             <div>
-                                <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
+                                <input name="heightInInches" value={this.state.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
                             </div>
                             <div>
                                 <button type="submit"> Add Agent </button>
@@ -197,19 +197,19 @@ class Agents extends React.Component {
                     <div>
                         <form onSubmit={this.editSubmitHandler}>
                             <div>
-                                <input name="firstName" value={this.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
+                                <input name="firstName" value={this.state.firstName} onChange={this.changeHandler} placeholder="First Name" type="text" />
                             </div>
                             <div>
-                                <input name="middleName" value={this.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
+                                <input name="middleName" value={this.state.middleName} onChange={this.changeHandler} placeholder="Middle Name" type="text" />
                             </div>
                             <div>
-                                <input name="lastName" value={this.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
+                                <input name="lastName" value={this.state.lastName} onChange={this.changeHandler} placeholder="Last Name" type="text" />
                             </div>
                             <div>
-                                <input name="dob" value={this.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
+                                <input name="dob" value={this.state.dob} onChange={this.changeHandler} placeholder="Date of Birth(yyyy-mm-dd)" type="text" />
                             </div>
                             <div>
-                                <input name="heightInInches" value={this.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
+                                <input name="heightInInches" value={this.state.heightInInches} onChange={this.changeHandler} placeholder="Height (in inches)" type="text" />
                             </div>
                             <div>
                                 <button type="submit"> Edit Agent </button>
